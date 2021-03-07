@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/locano/react_introduction#readme",
   "dependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-react": "^7.12.13",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
