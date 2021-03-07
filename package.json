@@ -1,0 +1,22 @@
+{
+  "name": "react_introduction",
+  "version": "1.0.0",
+  "description": "React Introduction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locano/react_introduction.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "locano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/locano/react_introduction/issues"
+  },
+  "homepage": "https://github.com/locano/react_introduction#readme"
+}
