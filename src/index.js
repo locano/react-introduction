@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import StartApp from "./components/startApp";
+import Game from "./components/tictactoe";
 
-ReactDOM.render(<StartApp />, document.getElementById("root"));
+ReactDOM.render(<Game />, document.getElementById("root"));
