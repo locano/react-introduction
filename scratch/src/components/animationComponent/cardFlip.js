@@ -15,6 +15,7 @@ class CardFlip extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
+    console.log('test');
     this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
   }
 
