@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CardFlip from "./components/animationComponent/cardFlip";
+import App from "./components/routing/pages/app";
+import './components/example/bootstrapComponent/bootStrapExample.scss'
 
-ReactDOM.render(<CardFlip />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
