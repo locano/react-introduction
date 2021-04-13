@@ -23,7 +23,7 @@ class TodoApp extends React.Component {
             onChange={this.handleChange}
             value={this.state.text}
           />
-          <button>Agregar Tarea #{this.state.items.length + 1}</button>
+          <button data-testid='agregar'>Agregar Tarea #{this.state.items.length + 1}</button>
         </form>
         <TodoList items={this.state.items} />
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/routing/pages/app";
-import './components/example/bootstrapComponent/bootStrapExample.scss'
+import TodoApp from "./components/example/statesComponent/todoApp";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<TodoApp />, document.getElementById("root"));
