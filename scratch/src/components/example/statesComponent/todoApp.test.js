@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render, fireEvent, cleanup } from "@testing-library/react";
 import TodoApp from "./todoApp";
 import TodoList from "./todoList";
 
@@ -18,7 +18,7 @@ describe("Todo App", () => {
   };
   // https://jestjs.io/docs/expect
 
-  xit("Validar Button inicial", () => {
+  it("Validar Button inicial", () => {
     render(<TodoApp />);
     // screen.debug();
     expect(screen.queryByTestId("agregar")).not.toBeNull();
@@ -35,18 +35,39 @@ describe("Todo App", () => {
     });
     //
     fireEvent.submit(screen.getByTestId("form-test-id"));
-    screen.debug();
-    expect(screen.getByText("Agregar Tarea #1")).not.toBeInTheDocument();
     expect(screen.getByText("Agregar Tarea #2")).toBeInTheDocument();
   });
 
-  xit("Validar Render con Lista Vacia", () => {
+  it("Validar un Click en una funcion props",() =>{
+    const mockFunction = jest.fn();
+    render(<TodoList items={[]} clickFunction={mockFunction}/>);
+    fireEvent.click(screen.getByTestId("test-click"));
+    expect(mockFunction.mock.calls.length).toEqual(1);
+  });
+
+  function MySpy() {
+    this.calls = 0;
+  }
+  
+  MySpy.prototype.fn = function () {
+    return () => this.calls++;
+  }
+
+  it("Validar un Click en una funcion props with Mock",() =>{
+    const mySpy = new MySpy();
+    const mockFunction = mySpy.fn();
+    render(<TodoList items={[]} clickFunction={mockFunction}/>);
+    fireEvent.click(screen.getByTestId("test-click"));
+    expect(mySpy.calls).toEqual(1);
+  });
+
+  it("Validar Render con Lista Vacia", () => {
     render(<TodoList items={[]} />);
     // screen.debug();
     expect(screen.queryByText("New Item 1")).toBeNull();
   });
 
-  xit("Validar Render con Lista Llena", () => {
+  it("Validar Render con Lista Llena", () => {
     const { rerender } = render(<TodoList items={props.items} />);
 
     // screen.debug();
