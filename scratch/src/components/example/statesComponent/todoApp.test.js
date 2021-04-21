@@ -1,25 +1,51 @@
-import React from 'react';
-import { screen, render, cleanup, getByTestId } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import TodoApp from './todoApp'
+import React from "react";
+import { screen, render, cleanup } from "@testing-library/react";
 
-describe('Todo App', () => {
-  let buttonId;
-  beforeAll(() => {
-    render(<TodoApp />)
-    buttonId = screen.getByTestId('agregar')
-  })
 
-  it('Mi button debe tener un texto', () => {
-    const message = 'Agregar Tarea #1';
-    const tbn1 = screen.getByText(message);
-    expect(tbn1).toBeInTheDocument()
-  })
+import TodoApp from "./todoApp";
+import TodoList from "./todoList";
 
-  xit('Primer Valor en button', () => {
-    expect(buttonId.value).toBe('Agregar Tarea #1')
-    fireEvent.change(buttonId, { target: { value: 'Agregar Tarea #2' } })
-  })
+describe("Todo App", () => {
+  let props = {
+    items:[
+      {
+        id: "1",
+        text: "New Item 1",
+      },
+      {
+        id: "2",
+        text: "New Item 2",
+      },
+    ]
+  };
+  // https://jestjs.io/docs/expect
 
-  afterAll(cleanup)
-})
+  it("Validar Button inicial", () => {
+    render(<TodoApp />);
+    // screen.debug();
+    expect(screen.queryByTestId("agregar")).not.toBeNull();    
+    expect(screen.getByText("Agregar Tarea #1")).toBeInTheDocument();
+    
+  });
+
+  it("Validar Render con Lista Vacia", () => {
+    render(<TodoList items={[]} />);
+    // screen.debug();
+    expect(screen.queryByText("New Item 1")).toBeNull();
+    
+  });
+
+  it("Validar Render con Lista Llena", () => {
+    const { rerender } = render(<TodoList items={props.items} />);
+    
+    // screen.debug();
+    expect(screen.getByTestId("listaTest").getElementsByTagName("LI")).toHaveLength(2)
+    expect(screen.queryByText("New Item 2")).toBeInTheDocument();
+
+    
+    rerender(<TodoList items={[]} />);
+    // screen.debug();
+    expect(screen.queryByText("New Item 1")).toBeNull();
+    
+  });
+});

@@ -1,5 +1,6 @@
 import React from "react";
 import "./todoApp.css";
+import TodoList from "./todoList";
 class TodoApp extends React.Component {
   // Constructor para nueva TodoApp
   constructor(props) {
@@ -50,20 +51,6 @@ class TodoApp extends React.Component {
       text: "",
     }));
     console.log(this.state.items);
-  }
-}
-
-class TodoList extends React.Component {
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.props.items.map((item) => (
-            <li key={item.id}>{item.text}</li>
-          ))}
-        </ul>
-      </div>
-    );
   }
 }
 
