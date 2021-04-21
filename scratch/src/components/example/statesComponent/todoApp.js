@@ -17,12 +17,12 @@ class TodoApp extends React.Component {
     return (
       <div>
         <h3>Ingrese las tareas pendientes:</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} data-testid="form-test-id">
           <label htmlFor="new-todo">¿Qué se necesita hacer?</label>
           <input
             id="new-todo"
+            data-testid="new-todo-id"
             onChange={this.handleChange}
-            value={this.state.text}
           />
           <button data-testid='agregar'>Agregar Tarea #{this.state.items.length + 1}</button>
         </form>
@@ -33,10 +33,12 @@ class TodoApp extends React.Component {
 
   handleChange(e) {
     this.setState({ text: e.target.value });
+    console.log('updating content');
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('state', this.state.text);
     if (this.state.text.length === 0) {
       return;
     }
