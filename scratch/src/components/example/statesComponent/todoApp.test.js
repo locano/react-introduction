@@ -20,7 +20,7 @@ describe("Todo App", () => {
 
   it("Validar Button inicial", () => {
     render(<TodoApp />);
-    // screen.debug();
+    screen.debug();
     expect(screen.queryByTestId("agregar")).not.toBeNull();
     expect(screen.getByText("Agregar Tarea #1")).toBeInTheDocument();
   });
@@ -63,21 +63,40 @@ describe("Todo App", () => {
 
   it("Validar Render con Lista Vacia", () => {
     render(<TodoList items={[]} />);
-    // screen.debug();
+    screen.debug();
     expect(screen.queryByText("New Item 1")).toBeNull();
   });
 
   it("Validar Render con Lista Llena", () => {
     const { rerender } = render(<TodoList items={props.items} />);
 
-    // screen.debug();
+    screen.debug();
     expect(
       screen.getByTestId("listaTest").getElementsByTagName("LI")
     ).toHaveLength(2);
     expect(screen.queryByText("New Item 2")).toBeInTheDocument();
 
     rerender(<TodoList items={[]} />);
-    // screen.debug();
+    screen.debug();
     expect(screen.queryByText("New Item 1")).toBeNull();
+  });
+
+  function MiSuma() {
+    this.calls = 0;
+  }
+
+  MiSuma.prototype.fn = function (a,b) {
+    return () => this.calls = a+b;
+  }
+
+  fit("validar suma", ()=>{
+    const a = 1;
+    const b = 2;
+    const mySpy = new MiSuma();
+    const mockFunction = mySpy.fn(a,b);
+    render(<TodoList items={[]} clickFunction={mockFunction}/>);
+    fireEvent.click(screen.getByTestId("test-click"));
+    expect(mySpy.calls).toEqual(3);
+
   });
 });
